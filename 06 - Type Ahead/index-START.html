@@ -1,23 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Type Ahead 👀</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
 
   <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
-    <ul class="suggestions">
-      <li>Filter for a city</li>
-      <li>or a state</li>
+    <input type="text" class="search" placeholder="City or State" id="search">
+    <ul class="ul suggestions">
+      <!-- <li>Filter for a city</li> -->
+      <!-- <li>or a state</li> -->
     </ul>
   </form>
-<script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  <script>
+    // let input = document.getElementById('search')
+    // let val = input.value
+    // const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json'
+    // let ul = document.querySelector('.ul')
+    // async function get() {
+    //   let res = await fetch(endpoint)
+    //   let data = await res.json()
+    //   let cities = data.map((e) => e.city)
+    //   let states = data.map((e) => e.state)
+    //   // let arr=[...cities]
+    //   input.addEventListener("keyup", () => {
 
-</script>
+    //     let ans = cities.filter((cty) => cty.toLowerCase() == input.value.toLowerCase())
+
+    //     let li = document.createElement('li')
+    //     if (ans != "" && input.value.length >= 1) {
+    //       li.innerHTML = ans
+    //       ul.appendChild(li)
+    //     } else if (input.value.length <= 1) {
+    //       let list = document.querySelectorAll("li")
+    //       for (let i = 0; i < list.length; i++) {
+    //         list = list[i]
+    //         list.remove()
+    //       }
+    //     }
+    //   })
+
+
+    //   for (let i in data) {
+    //     // console.log(data[i].city)
+    //     if (data[i].city == input.value || data[i].state == input.value) {
+    //       console.table(data[i].city, data[i].state)
+    //     }
+    //   }
+
+    // }
+    // get()
+    let ul = document.querySelector('.ul')
+    let input = document.getElementById('search')
+
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json'
+    async function getdata(cb2) {
+      let res = await fetch(endpoint)
+      let data = await res.json()
+      // cb(data)
+      inp(data)
+    }
+    getdata(inp)
+    function dsp(data, val) {
+
+      let html = data.map((p) => {
+        // let ct=data.map((c)=>c.city)
+        // let st=data.map((s)=>s.state)
+        // let li=document.createElement("li")
+        // li.innerHTML=ct
+        // ul.appendChild(li)
+        let ct =[]
+        ct.push(p.city)
+        console.log(ct)
+        let st = p.state
+        let li = document.createElement("li")
+        if (val.length >= 2) {
+           li.innerHTML = ct + "," + st
+          ul.appendChild(li)
+        }
+        else if(val.length<=2) {         
+          let list = document.querySelectorAll("li")
+          for (let i = 0; i < list.length; i++) {
+           li.innerHTML =""
+           li = list[i]
+           li.remove()
+          }
+          ct=null
+          st=null
+
+        }
+
+
+
+
+      })
+
+      // let hi=data.map((c)=>c.city)
+
+      // // console.log(data.map((c) => c.city))
+      // li.innerHTML=(data.map((c) => c.city))     
+      // ul.appendChild(li)
+      // ul.innerHTML=`<li>${data.map((c)=>c.city)}</li>`     
+
+
+
+    }
+    function inp(data) {
+
+      input.addEventListener("keyup", (e) => {
+        let val = e.target.value.toLowerCase()
+        if (val) {
+          dsp(data.filter((i) => i.city.toLowerCase().indexOf(val) != -1) || data.filter((i) => i.state.toLowerCase().indexOf(val) != -1), val)
+
+          // } else {
+          //   dsp(data)
+          // }
+        }
+      })
+    }
+  </script>
 </body>
+
 </html>
