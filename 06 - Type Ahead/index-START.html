@@ -75,15 +75,26 @@
         // li.innerHTML=ct
         // ul.appendChild(li)
         let ct =[]
-        ct.push(p.city)
+        if(ct.includes(p.city)==0){
+          ct.push(p.city)
+        }else{
+          return
+        }
+        let st =[]
+        if(st.includes(p.state)==0){
+          st.push(p.state)
+        }else{
+          return
+        }
+       
         console.log(ct)
-        let st = p.state
+        
         let li = document.createElement("li")
-        if (val.length >= 2) {
+        if (val.length >= 3) {
            li.innerHTML = ct + "," + st
           ul.appendChild(li)
         }
-        else if(val.length<=2) {         
+        else if(val.length<=5) {         
           let list = document.querySelectorAll("li")
           for (let i = 0; i < list.length; i++) {
            li.innerHTML =""
