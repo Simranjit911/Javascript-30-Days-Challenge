@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Mouse Shadow</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
 
   <div class="hero">
@@ -12,30 +14,53 @@
   </div>
 
   <style>
-  html {
-    color: black;
-    font-family: sans-serif;
-  }
+    html {
+      color: black;
+      font-family: sans-serif;
+    }
 
-  body {
-    margin: 0;
-  }
+    body {
+      margin: 0;
+    }
 
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-  }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+    }
 
-  h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
-    font-size: 100px;
-  }
+    h1 {
+      text-shadow: 10px 10px 0 rgba(0, 0, 0, 1);
+      font-size: 100px;
+    }
   </style>
 
-<script>
-</script>
+  <script>
+    let hero = document.querySelector('.hero')
+    let text = hero.querySelector('h1')
+    let walk=100
+    function shadow(e) {
+      let { offsetWidth: width, offsetHeight: height } = hero
+      let { offsetX: x, offsetY: y } = e
+      if (this !== e.target) {
+        x = x + e.target.offsetLeft
+        y = y + e.target.offsetTop
+
+      }
+      let xwalk = Math.round((x / width * walk) - (walk / 2))
+      let ywalk = Math.round((y / height * walk) - (walk / 2))
+      text.style.textShadow=`
+      ${ywalk}px ${xwalk}px 0 red,
+      ${xwalk*-2}px ${ywalk*-2}px 0 blue,
+      ${ywalk*-3}px ${xwalk*-3  }px 0 grey,
+      ${xwalk*-4}px ${ywalk*-4}px 0 tomato
+      
+      `
+    }
+    hero.addEventListener('mousemove', shadow)
+  </script>
 </body>
+
 </html>

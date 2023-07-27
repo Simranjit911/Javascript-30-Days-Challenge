@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Reference VS Copy</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
 
   <script>
@@ -14,7 +16,8 @@
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
-
+    let team = [...players]
+    console.log(team)
     // You might think we can just do something like this:
 
     // however what happens when we update that array?
@@ -39,10 +42,12 @@
 
     // with Objects
     const person = {
-      name: 'Wes Bos',
-      age: 80
+      name: 'Simran',
+      age: 25 ,
+      work:"SD3"
     };
-
+let person2={...person}
+console.log(person2)
     // and think we make a copy:
 
     // how do we take a copy instead?
@@ -54,4 +59,5 @@
   </script>
 
 </body>
+
 </html>
