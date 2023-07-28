@@ -183,6 +183,20 @@
     </li>
   </ul>
 <script>
+  let timenodes=document.querySelectorAll('[data-time]')
+  timenodes=Array.from(timenodes)
+  let sec=timenodes
+  .map(node=>node.dataset.time)
+  .map(timeCode=>{
+    const [min,secs]=timeCode.split(":").map(parseFloat)
+    return (min*60)+secs
+   
+    
+  }).reduce((tot,vidsec)=>tot+vidsec)
+ 
+ let secleft=sec
+ let hrs=Math.round(secleft/3600)
+ secleft=secleft%3600
 </script>
 </body>
 </html>
